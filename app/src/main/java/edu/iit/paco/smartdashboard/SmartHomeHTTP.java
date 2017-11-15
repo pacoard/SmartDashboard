@@ -26,6 +26,7 @@ import java.util.concurrent.ExecutionException;
  *
  * https://www.learn2crack.com/2013/10/android-asynctask-json-parsing-example.html
  * https://developer.android.com/reference/android/os/AsyncTask.html
+ * https://code.tutsplus.com/tutorials/android-from-scratch-using-rest-apis--cms-27117
  */
 
 /* // How to use SmartHomeHTTP to update UI
@@ -50,8 +51,20 @@ public class SmartHomeHTTP {
         String t = "";
         SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
         try {
-            // t = shat.execute(homeURL + "/temp").get();
-            t = shat.execute(homeURL).get();
+            t = shat.execute(homeURL.concat("/sensor/temperature")).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+    public String toggleLights(String whichLights) {
+        String t = "";
+        SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
+        try {
+            t = shat.execute(homeURL.concat("/actuator/toggleLight/"+whichLights)).get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
