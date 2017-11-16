@@ -5,6 +5,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="edu.iit.paco.smartdashboard.LoginActivity">
+        tools:context="edu.iit.paco.smartdashboard.ActuatorsActivity">
 
 </android.support.constraint.ConstraintLayout>

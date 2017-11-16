@@ -47,11 +47,24 @@ public class SmartHomeHTTP {
         this.homeURL = homeURL;
     }
 
+    private String getJSONfield(String json, String field) {
+        //JSON parsing
+        String value = "";
+        try {
+            JSONObject obj = new JSONObject(json);
+            value = obj.getString(field);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return value;
+    }
     public String getTemperature() {
         String t = "";
         SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
         try {
-            t = shat.execute(homeURL.concat("/sensor/temperature")).get();
+            String res = shat.execute(homeURL.concat("/sensor/temperature")).get();
+            t = getJSONfield(res, "data");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -64,7 +77,8 @@ public class SmartHomeHTTP {
         String t = "";
         SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
         try {
-            t = shat.execute(homeURL.concat("/actuator/toggleLight/"+whichLights)).get();
+            String res = shat.execute(homeURL.concat("/actuator/toggleLight/"+whichLights)).get();
+            t = getJSONfield(res, "data");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
