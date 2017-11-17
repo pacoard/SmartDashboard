@@ -12,4 +12,5 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
+    <string name="title_activity_signup">SignupActivity</string>
 </resources>

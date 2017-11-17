@@ -1,74 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="edu.iit.paco.smartdashboard.DashboardActivity">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="70dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="SELECT OPTION"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="56dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <Button
-            android:id="@+id/sensorButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="64dp"
-            android:background="@color/colorPrimaryDark"
-            android:text="SENSORS"
-            android:textColor="@android:color/background_light"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:layout_editor_absoluteX="37dp" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/homeicon" />
 
-        <Button
-            android:id="@+id/actuatorButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="21dp"
-            android:background="@android:color/holo_green_dark"
-            android:text="ACTUATORS"
-            android:textColor="@android:color/background_light"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sensorButton" />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_sensors"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:text="SENSORS" />
 
-        <Button
-            android:id="@+id/StatisticsButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="18dp"
-            android:background="?android:attr/colorFocusedHighlight"
-            android:text="STATISTICS"
-            android:textColor="@android:color/background_light"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/actuatorButton" />
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_actuators"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:text="ACTUATORS" />
 
-    </android.support.constraint.ConstraintLayout>
-</android.support.design.widget.CoordinatorLayout>
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_statistics"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="monospace"
+        android:padding="12dp"
+        android:text="STATISTICS" />
+
+
+</LinearLayout>
+
