@@ -1,25 +1,12 @@
 package edu.iit.paco.smartdashboard;
 
-import android.os.Handler;
-import android.util.JsonReader;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
-
-
 
 /**
  * Interface with the server
@@ -58,6 +45,20 @@ public class SmartHomeHTTP {
         }
 
         return value;
+    }
+
+    public String getSensorsData() {
+        String t = "";
+        SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
+        try {
+            String res = shat.execute(homeURL.concat("/sensor/fullData")).get();
+            t = res;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return t;
     }
     public String getTemperature() {
         String t = "";
@@ -115,7 +116,6 @@ public class SmartHomeHTTP {
                         sb.append(output);
                     }
                     result = sb.toString();
-
 
                     //JSON parsing
                     /*JsonReader jsonReader = new JsonReader(respBodyReader);
