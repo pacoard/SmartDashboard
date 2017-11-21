@@ -35,14 +35,21 @@
                 android:name=".SignupActivity"
                 android:label="@string/title_activity_signup"
                 android:theme="@style/AppTheme.NoActionBar"/>
+
         <receiver
-            android:name=".PeriodicUpdateAlarm"
-            android:process=":remote" >
+                android:name=".PeriodicUpdateAlarm"
+                android:process=":remote">
         </receiver>
+
         <service
                 android:name=".PeriodicUpdateService"
                 android:exported="false">
         </service>
+
+        <activity
+                android:name=".GraphActivity"
+                android:label="@string/title_activity_graph">
+        </activity>
     </application>
 
 </manifest>
