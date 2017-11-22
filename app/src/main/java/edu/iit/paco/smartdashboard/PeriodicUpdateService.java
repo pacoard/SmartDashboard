@@ -34,5 +34,7 @@ public class PeriodicUpdateService extends IntentService {
         public void updateDB(String data) {
             Log.d("updateDB", "Updating DB...");
             Log.d("updateDB", data);
+
+            //db.insert(Json.parse)data)
         }
 }
