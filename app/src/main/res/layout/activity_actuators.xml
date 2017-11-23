@@ -8,13 +8,6 @@
     android:paddingTop="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="72dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/homeicon" />
-
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_thermostat"
         android:layout_width="fill_parent"
@@ -35,11 +28,12 @@
             android:id="@+id/textView2"
             android:layout_width="25dp"
             android:layout_height="wrap_content"
-            android:text="0" />
+            android:text="60"
+            android:textSize="18sp" />
 
         <SeekBar
             android:id="@+id/seekBar"
-            android:layout_width="300dp"
+            android:layout_width="290dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal" />
 
@@ -48,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="100" />
+            android:text="85"
+            android:textSize="18sp" />
     </LinearLayout>
 
 
@@ -65,27 +60,43 @@
 
     <Switch
         android:id="@+id/lights_kitchen"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Kitchen" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Kitchen"
+        android:textSize="18sp" />
 
     <Switch
         android:id="@+id/lights_livingroom"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Living Room" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Living Room"
+        android:textSize="18sp"/>
 
     <Switch
         android:id="@+id/lights_bedroom"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Bedroom" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Bedroom"
+        android:textSize="18sp"/>
 
     <Switch
         android:id="@+id/lights_hall"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Hall" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Hall"
+        android:textSize="18sp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_windows"
@@ -100,27 +111,43 @@
 
     <Switch
         android:id="@+id/windows_kitchen"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Kitchen" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Kitchen"
+        android:textSize="18sp"/>
 
     <Switch
         android:id="@+id/windows_livingroom"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Living Room" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Living Room"
+        android:textSize="18sp"/>
 
     <Switch
         android:id="@+id/windows_bedroom"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Bedroom" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Bedroom"
+        android:textSize="18sp"/>
 
     <Switch
         android:id="@+id/windows_Hall"
-        android:layout_width="match_parent"
+        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:text="Hall" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Hall"
+        android:textSize="18sp"/>
 
 
 </LinearLayout>
