@@ -5,6 +5,113 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/background"
         tools:context="edu.iit.paco.smartdashboard.SensorsActivity">
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_lights"
+        android:layout_width="320dp"
+        android:layout_height="34dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="monospace"
+        android:padding="7dp"
+        android:text="SENSORS"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="88dp" />
+
+    <EditText
+        android:id="@+id/editTextTemperature"
+        android:layout_width="69dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteY="142dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/btn_lights" />
+
+    <TextView
+        android:id="@+id/textViewTemperature"
+        android:layout_width="193dp"
+        android:layout_height="28dp"
+        android:layout_marginRight="86dp"
+        android:text="Temperatature        :"
+        android:textSize="18sp"
+        app:layout_constraintRight_toLeftOf="@+id/editTextTemperature"
+        tools:layout_editor_absoluteY="161dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editTextHumidity"
+        android:layout_width="69dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteY="206dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/btn_lights"
+        app:layout_constraintLeft_toRightOf="@+id/textViewTemperature"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewHumidity"
+        android:layout_width="193dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="86dp"
+        android:text="Humidity                  :"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
+        app:layout_constraintRight_toLeftOf="@+id/editTextHumidity"
+        tools:layout_editor_absoluteY="221dp" />
+
+    <EditText
+        android:id="@+id/editTextNoise"
+        android:layout_width="69dp"
+        android:layout_height="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteY="264dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="@+id/btn_lights"
+        app:layout_constraintLeft_toRightOf="@+id/textViewTemperature"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewNoise"
+        android:layout_width="193dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="86dp"
+        android:text="Noise Level             :"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
+        app:layout_constraintRight_toLeftOf="@+id/editTextHumidity"
+        tools:layout_editor_absoluteY="279dp" />
+
+    <ImageView
+        android:id="@+id/refreshView"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_lights"
+        app:layout_constraintHorizontal_bias="0.925"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296"
+        app:srcCompat="@drawable/refresh" />
 
 </android.support.constraint.ConstraintLayout>
