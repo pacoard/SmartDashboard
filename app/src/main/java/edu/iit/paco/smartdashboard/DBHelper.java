@@ -1,9 +1,5 @@
 package edu.iit.paco.smartdashboard;
 
-/**
- * Created by Paco on 21/11/2017.
- */
-
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +16,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database Version
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 1;
     // Database Name
     private static final String DATABASE_NAME = "MeasurementsDB";
     // Books table name
@@ -41,7 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
         // SQL statement to create book table
         String CREATE_HISTORY_TABLE = "CREATE TABLE "+HISTORY_TABLE_NAME+" ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "date TEXT, "+
-                "temperature TEXT, humidity TEXT, noiselevel TEXT, )";
+                "temperature TEXT, humidity TEXT, noiselevel TEXT)";
         // create history table
         db.execSQL(CREATE_HISTORY_TABLE);
 
@@ -63,47 +59,49 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     /*CRUD operations (create "add", read "get", update, delete) */
-    //Paco adding to the DB table
     public void addDataRow(String date, String t, String h, String nl){
         //Log.d("addData", book.toString());
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        //values.put(KEY_TITLE, book.getTitle()); // get title
-        //values.put(KEY_AUTHOR, book.getAuthor()); // get author
-        //values.put(KEY_RATING, book.getRating()); // get rating
+        values.put(KEY_DATE, date);
+        values.put(KEY_TEMPERATURE, t);
+        values.put(KEY_HUMIDITY,h);
+        values.put(KEY_NOISE,nl);
         // 3. insert
         db.insert(HISTORY_TABLE_NAME, // table
                 null, //nullColumnHack
                 values); // key/value -> keys = column names/values
         // 4. Close dbase
+        Log.d("addRow",values.toString());
         db.close();
     }
 
     // Get All temperature measurements given a certain Date
-    public List<String> getTempHistory(String date) {
+    public List<String> getTempHistory() {
         List<String> temperatures = new LinkedList<String>();
         // 1. build the query
-        String query = "SELECT temperature FROM " + HISTORY_TABLE_NAME + " WHERE date =" + date.trim();
+        String query = "SELECT date, temperature FROM " + HISTORY_TABLE_NAME + " ORDER BY date ASC";
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         // 3. go over each row
+        boolean cursorOK = cursor.moveToFirst();
         if (cursor.moveToFirst()) {
             do {
                 // Add measurement to the list
-                temperatures.add(cursor.getString(1)); //Primary key is column 0
+                temperatures.add(cursor.getString(0) + "," + cursor.getString(1)); //Primary key is column 0
             } while (cursor.moveToNext());
         }
         Log.d("getTempHistory()", temperatures.toString());
         return temperatures; // return list
     }
 
-    public List<String> getHumHistory(String date) {
+    public List<String> getHumHistory() {
         List<String> humidities = new LinkedList<String>();
         // 1. build the query
-        String query = "SELECT humidity FROM " + HISTORY_TABLE_NAME + " WHERE date =" + date.trim();
+        String query = "SELECT date,humidity FROM " + HISTORY_TABLE_NAME + " ORDER BY date ASC";
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -111,16 +109,16 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Add measurement to the list
-                humidities.add(cursor.getString(1)); //Primary key is column 0
+                humidities.add(cursor.getString(0) + "," + cursor.getString(1)); //Primary key is column 0
             } while (cursor.moveToNext());
         }
         Log.d("getHumHistory()", humidities.toString());
         return humidities; // return list
     }
-    public List<String> getNoiseHistory(String date) {
+    public List<String> getNoiseHistory() {
         List<String> noise = new LinkedList<String>();
         // 1. build the query
-        String query = "SELECT noiselevel FROM " + HISTORY_TABLE_NAME + " WHERE date =" + date.trim();
+        String query = "SELECT date,noiselevel FROM " + HISTORY_TABLE_NAME + " ORDER BY date ASC";
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -128,7 +126,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 // Add measurement to the list
-                noise.add(cursor.getString(1)); //Primary key is column 0
+                noise.add(cursor.getString(0) + "," + cursor.getString(1)); //Primary key is column 0
             } while (cursor.moveToNext());
         }
         Log.d("getNoiseHistory()", noise.toString());
