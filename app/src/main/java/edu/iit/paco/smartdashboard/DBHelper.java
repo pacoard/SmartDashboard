@@ -1,6 +1,8 @@
 package edu.iit.paco.smartdashboard;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import android.content.ContentValues;
@@ -10,18 +12,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by Paco on 18/11/2017.
- */
-
 public class DBHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
     private static final String DATABASE_NAME = "MeasurementsDB";
-    // Books table name
+
     private static final String HISTORY_TABLE_NAME = "history";
-    // Books Table Columns names
+
     private static final String KEY_ID = "id";
     private static final String KEY_DATE = "date";
     private static final String KEY_TEMPERATURE = "temperature";
@@ -34,19 +32,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
+
         String CREATE_HISTORY_TABLE = "CREATE TABLE "+HISTORY_TABLE_NAME+" ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "date TEXT, "+
                 "temperature TEXT, humidity TEXT, noiselevel TEXT)";
         // create history table
         db.execSQL(CREATE_HISTORY_TABLE);
 
-        // todo
-        /*String CREATE_BOOK_TABLE = "CREATE TABLE "+USERS_TABLE_NAME+" ( " +
-        "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "date TEXT, "+
-        "temperature TEXT, humidity TEXT, noiselevel TEXT, )";
-        // create history table
-        db.execSQL(CREATE_BOOK_TABLE);*/
     }
 
     @Override
@@ -58,9 +50,8 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    /*CRUD operations (create "add", read "get", update, delete) */
-    public void addDataRow(String date, String t, String h, String nl){
-        //Log.d("addData", book.toString());
+    public void addDataRow(String t, String h, String nl){
+        String date = new SimpleDateFormat("hh:mm:ss").format(new Date());
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
         // 2. create ContentValues to add key "column"/value
@@ -133,7 +124,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return noise; // return list
     }
     public String[] getLastRow() {
-        String[] lastRow = new String[4];
+        String[] lastRow = new String[5];
         String query = "SELECT  * FROM " + HISTORY_TABLE_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);

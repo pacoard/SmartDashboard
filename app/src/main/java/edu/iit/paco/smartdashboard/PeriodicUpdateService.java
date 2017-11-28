@@ -3,6 +3,8 @@ package edu.iit.paco.smartdashboard;
 import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Paco on 19/11/2017.
@@ -35,6 +37,16 @@ public class PeriodicUpdateService extends IntentService {
             Log.d("updateDB", "Updating DB...");
             Log.d("updateDB", data);
 
-            //db.insert(Json.parse)data)
+            DBHelper db = new DBHelper(this);
+            try {
+                JSONObject obj = new JSONObject(data);
+                db.addDataRow(obj.getString("temperature"),
+                              obj.getString("humidity"),
+                              obj.getString("noiseLevel")
+                             );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            db.getLastRow();
         }
 }

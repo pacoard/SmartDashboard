@@ -19,13 +19,13 @@ import android.content.Context;
         AlarmManager alarm = (AlarmManager) this.getSystemService(ALARM_SERVICE);
         // Star alarm
         if (!serviceStarted) {
-            Log.d(TAG, "serviceStarded = false");
+            Log.d(TAG, "serviceStarded = true");
             alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
                     PeriodicUpdateAlarm.FETCH_INTERVAL_MILLIS, pIntent);
             serviceStarted = true;
         // Stop alarm
         } else {
-            Log.d(TAG, "serviceStarded = true");
+            Log.d(TAG, "serviceStarded = false");
             alarm.cancel(pIntent);
             serviceStarted = false;
         }
