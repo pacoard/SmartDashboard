@@ -11,44 +11,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="72dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/homeicon" />
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/homeicon" android:id="@+id/imageView" android:onClick="tryService"/>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_sensors"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorPrimary"
-        android:fontFamily="monospace"
-        android:padding="12dp"
-        android:text="SENSORS" />
+    <Button
+            android:id="@+id/btn_sensors"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/colorPrimary"
+            android:fontFamily="monospace"
+            android:padding="12dp"
+            android:text="SENSORS" android:onClick="sensorsBtn"/>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_actuators"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorPrimaryDark"
-        android:fontFamily="monospace"
-        android:padding="12dp"
-        android:text="ACTUATORS" />
+    <Button
+            android:id="@+id/btn_actuators"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="monospace"
+            android:padding="12dp"
+            android:text="ACTUATORS" android:onClick="actuatorsBtn"/>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_statistics"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/colorAccent"
-        android:fontFamily="monospace"
-        android:padding="12dp"
-        android:text="STATISTICS" />
+    <Button
+            android:id="@+id/btn_statistics"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/colorAccent"
+            android:fontFamily="monospace"
+            android:padding="12dp"
+            android:text="STATISTICS" android:onClick="statisticsBtn"/>
 
 
 </LinearLayout>

@@ -2,6 +2,8 @@ package edu.iit.paco.smartdashboard;
 
 //package com.sourcey.materiallogindemo;
 
+        import android.app.AlarmManager;
+        import android.app.PendingIntent;
         import android.app.ProgressDialog;
         import android.os.Bundle;
         import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ package edu.iit.paco.smartdashboard;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
+    private boolean serviceStarted = false;
 
     @InjectView(R.id.input_email) EditText _emailText;
     @InjectView(R.id.input_password) EditText _passwordText;

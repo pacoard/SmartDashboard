@@ -8,13 +8,14 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     // Database Name
     private static final String DATABASE_NAME = "MeasurementsDB";
 
@@ -26,6 +27,13 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_HUMIDITY = "humidity";
     private static final String KEY_NOISE = "noiselevel";
 
+    private static final String USER_TABLE_NAME = "users";
+
+    private static final String KEY_NAME = "name";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_HOME_URL = "homeurl";
+
     public DBHelper (Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -33,20 +41,62 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_HISTORY_TABLE = "CREATE TABLE "+HISTORY_TABLE_NAME+" ( " +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT, " + "date TEXT, "+
-                "temperature TEXT, humidity TEXT, noiselevel TEXT)";
-        // create history table
-        db.execSQL(CREATE_HISTORY_TABLE);
+        db.execSQL("CREATE TABLE "+HISTORY_TABLE_NAME+" ( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, "+
+                "temperature TEXT, humidity TEXT, noiselevel TEXT)");
 
+        db.execSQL("CREATE TABLE "+USER_TABLE_NAME+" ( " +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, " +
+                "email TEXT UNIQUE, password TEXT, homeurl TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older measurement table if existed
+        // Drop older tables if existed
         db.execSQL("DROP TABLE IF EXISTS "+HISTORY_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+USER_TABLE_NAME);
         // create fresh measurements table
         this.onCreate(db);
+    }
+
+    public boolean createUser(String name, String email, String password, String homeurl) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, name);
+        values.put(KEY_EMAIL, email);
+        values.put(KEY_PASSWORD,password);
+        values.put(KEY_HOME_URL,homeurl);
+
+        try {
+            db.insert(USER_TABLE_NAME, // table
+                        null, //nullColumnHack
+                        values); // key/value -> keys = column names/values
+        } catch (SQLiteConstraintException e) {
+            // Show error message here
+            return false;
+        }
+
+        Log.d("createUser",values.toString());
+        db.close();
+        return true;
+    }
+
+    public String getUserHomeURL(String user) {
+        String field, url;
+        if (user.contains("@")) {
+            field = KEY_EMAIL;
+        } else {
+            field = KEY_NAME;
+        }
+
+        String query = "SELECT " + KEY_HOME_URL + " FROM " + USER_TABLE_NAME + " WHERE "+field+" = '" + user +"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        url = cursor.getString(0);
+        db.close();
+
+        return url;
     }
 
 
