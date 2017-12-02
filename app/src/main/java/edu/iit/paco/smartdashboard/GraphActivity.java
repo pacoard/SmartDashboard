@@ -107,6 +107,7 @@ public class GraphActivity extends AppCompatActivity {
 
             //Call get temperature history from the DB
             List<String> temperatures = db.getTempHistory();
+            Log.d("Temperatures from DB", temperatures.toString());
             for (String item : temperatures) {
                 String[] pairs = item.split(",");
                 String[] time = pairs[0].split(":");
@@ -115,7 +116,7 @@ public class GraphActivity extends AppCompatActivity {
                 cal.set(Calendar.SECOND, Integer.parseInt(time[2]));
                 x = cal.getTime();
                 double y = Double.parseDouble(pairs[1]);
-                series.appendData(new DataPoint(x, y), true, 300);
+                series.appendData(new DataPoint(x, y), true, 1000);
             }
             graph.setTitle("Temperature measures");
             graph.getViewport().setYAxisBoundsManual(false);
@@ -131,7 +132,7 @@ public class GraphActivity extends AppCompatActivity {
                 cal.set(Calendar.SECOND, Integer.parseInt(time[2]));
                 x = cal.getTime();
                 double y = Double.parseDouble(pairs[1]);
-                series.appendData(new DataPoint(x, y), true, 300);
+                series.appendData(new DataPoint(x, y),true,1000);
             }
             graph.setTitle("Humidity measures");
             graph.getViewport().setYAxisBoundsManual(false);
@@ -150,7 +151,7 @@ public class GraphActivity extends AppCompatActivity {
                 double y = Double.parseDouble(pairs[1]);
                 y = Math.round(y*100.0)/100.0;
                 Log.d("Y con round", String.valueOf(y));
-                series.appendData(new DataPoint(x, y), true, 300);
+                series.appendData(new DataPoint(x, y), true, 1000);
             }
             graph.setTitle("Noise level measures");
             graph.getViewport().setYAxisBoundsManual(false);
