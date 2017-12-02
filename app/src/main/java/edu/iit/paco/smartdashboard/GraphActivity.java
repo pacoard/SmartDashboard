@@ -52,7 +52,6 @@ public class GraphActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 int item = dropdown.getSelectedItemPosition();
                 selection = sensors[item];
-                Toast.makeText(getApplicationContext(), "You have selected: " + selection, Toast.LENGTH_SHORT).show();
                 //Call draw graph method
                 try{
                     graph.removeAllSeries(); //Redraw the graph
@@ -69,32 +68,6 @@ public class GraphActivity extends AppCompatActivity {
 
             }
         });
-
-        //Testing for adding info to the DB
-//        db.addDataRow("00:20:32", "20.041122180002684","48.35922736859142","12.227408465577994");
-//        db.addDataRow("01:00:50", "20.765050540236928","47.15570451018764", "10.923370173717544");
-//        db.addDataRow("02:00:21", "19.547655333140245", "44.073918845187656","10.006581184493278");
-//        db.addDataRow("03:00:04", "20.262159195640834", "45.38633631962485", "10.536616586652425");
-//        db.addDataRow("04:15:41", "19.616120420792043", "46.27357853462845", "11.599742245037943");
-//        db.addDataRow("05:00:09" , "19.349833139244016", "48.4316264968579", "11.801602889585174");
-//        db.addDataRow("06:11:52" , "20.711819625692925", "49.787798400225675", "13.034600927010114");
-//        db.addDataRow("07:36:18" , "19.997791719216625", "44.12262253550275", "10.940817934808635");
-//        db.addDataRow("08:00:00" , "19.812754224939454", "48.661157583745975", "11.490997316755173");
-//        db.addDataRow("09:40:22" , "20.258171789671707", "48.71653399252755", "13.275809649912905");
-//        db.addDataRow("10:00:15" , "20.337749386842745", "49.9327190159387", "13.334231142811134");
-//        db.addDataRow("11:00:39" , "20.35050906337924", "46.36483603471886", "13.967911849784173");
-//        db.addDataRow("12:00:05" , "20.924044520678624", "46.940870162440554", "12.678945963556368");
-//        db.addDataRow("13:00:18" , "19.461763132414568", "45.8321452752859", "12.365516892696789");
-//        db.addDataRow("14:00:29" , "20.10819262320041", "44.950445224450355", "10.040860366697524");
-//        db.addDataRow("15:25:57" , "20.87209798425871", "48.876335371806114", "10.555778193053833");
-//        db.addDataRow("16:00:40" , "19.690903666220645", "47.87210672242834", "12.588802535764437");
-//        db.addDataRow("17:00:20" , "19.707027534000225", "44.47468903478703", "12.41895097219489");
-//        db.addDataRow("18:00:17" , "20.22515682284179", "46.57811594186302", "12.020328136987391");
-//        db.addDataRow("19:00:08" , "20.125137924520182", "48.20511371138322", "10.759504206915931");
-//        db.addDataRow("20:00:31" , "19.530685833943917", "49.2403920992688", "13.0704659143457");
-//        db.addDataRow("21:00:26" , "20.709761351504483", "49.14491765949006", "13.963722685379384");
-//        db.addDataRow("22:00:38" , "20.973198672354197", "44.086274847709284", "10.51557678561749");
-//        db.addDataRow("23:00:56" , "19.53776683548128", "49.79635861257178", "13.404795723990311");
 
     }
 
@@ -119,8 +92,10 @@ public class GraphActivity extends AppCompatActivity {
                 series.appendData(new DataPoint(x, y), true, 1000);
             }
             graph.setTitle("Temperature measures");
-            graph.getViewport().setYAxisBoundsManual(false);
-            graph.getGridLabelRenderer().setVerticalAxisTitle("(ºC)");
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(55);
+            graph.getViewport().setMaxY(90);
+            graph.getGridLabelRenderer().setVerticalAxisTitle("(ºF)");
         } else if (selection.equals("Humidity")) {
             //Call get humidity history from the DB
             List<String> humidity = db.getHumHistory();
@@ -135,7 +110,9 @@ public class GraphActivity extends AppCompatActivity {
                 series.appendData(new DataPoint(x, y),true,1000);
             }
             graph.setTitle("Humidity measures");
-            graph.getViewport().setYAxisBoundsManual(false);
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(45);
+            graph.getViewport().setMaxY(55);
             graph.getGridLabelRenderer().setVerticalAxisTitle("(% humidity)");
         } else if (selection.equals("Noise level")) {
             //Call get noise history from the DB
@@ -154,7 +131,9 @@ public class GraphActivity extends AppCompatActivity {
                 series.appendData(new DataPoint(x, y), true, 1000);
             }
             graph.setTitle("Noise level measures");
-            graph.getViewport().setYAxisBoundsManual(false);
+            graph.getViewport().setYAxisBoundsManual(true);
+            graph.getViewport().setMinY(8);
+            graph.getViewport().setMaxY(120);
             graph.getGridLabelRenderer().setVerticalAxisTitle("(dB)");
         }
 
