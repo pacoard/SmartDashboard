@@ -34,7 +34,7 @@ public class SmartHomeHTTP {
         this.homeURL = homeURL;
     }
 
-    private String getJSONfield(String json, String field) {
+    public static String getJSONfield(String json, String field) {
         //JSON parsing
         String value = "";
         try {
@@ -45,6 +45,20 @@ public class SmartHomeHTTP {
         }
 
         return value;
+    }
+
+    public String getActuatorsStatus() {
+        String t = "";
+        SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
+        try {
+            String res = shat.execute(homeURL.concat("/actuator/status")).get();
+            t = res;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return t;
     }
 
     public String getSensorsData() {
@@ -60,11 +74,26 @@ public class SmartHomeHTTP {
         }
         return t;
     }
-    public String getTemperature() {
+
+    public String toggle(String whichActuator, String whichRoom) {
         String t = "";
         SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
         try {
-            String res = shat.execute(homeURL.concat("/sensor/temperature")).get();
+            String res = shat.execute(homeURL.concat("/actuator/"+whichActuator+"/"+whichRoom)).get();
+            t = res;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
+
+    public String thermostat(String value) {
+        String t = "";
+        SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
+        try {
+            String res = shat.execute(homeURL.concat("/actuator/thermostat/"+value)).get();
             t = getJSONfield(res, "data");
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -74,11 +103,11 @@ public class SmartHomeHTTP {
         return t;
     }
 
-    public String toggleLights(String whichLights) {
+    public String getThermostatValue() {
         String t = "";
         SmartHomeHTTPAsyncTask shat = new SmartHomeHTTPAsyncTask();
         try {
-            String res = shat.execute(homeURL.concat("/actuator/toggleLight/"+whichLights)).get();
+            String res = shat.execute(homeURL.concat("/actuator/thermostat/value")).get();
             t = getJSONfield(res, "data");
         } catch (InterruptedException e) {
             e.printStackTrace();

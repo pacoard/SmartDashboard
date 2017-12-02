@@ -75,10 +75,12 @@ public class DashboardActivity extends AppCompatActivity {
 
     public void sensorsBtn(View v) {
         Intent intent = new Intent(this, SensorsActivity.class);
+        intent.putExtra("url", homeURL);
         startActivity(intent);
     }
     public void actuatorsBtn(View v) {
         Intent intent = new Intent(this, ActuatorsActivity.class);
+        intent.putExtra("url", homeURL);
         startActivity(intent);
     }
     public void statisticsBtn(View v) {

@@ -26,8 +26,8 @@ public class SensorsActivity extends AppCompatActivity {
         String[] data = db.getLastRow();
         db.close();
 
-        tempEditText.setText(data[2].substring(0, 4));
-        humEditText.setText(data[3].substring(0, 4));
-        noiseEditText.setText(data[4].substring(0, 4));
+        tempEditText.setText(data[2].substring(0, 5));
+        humEditText.setText(data[3].substring(0, 5));
+        noiseEditText.setText(data[4].substring(0, 5));
     }
 }

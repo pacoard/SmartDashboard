@@ -26,11 +26,8 @@ public class PeriodicUpdateService extends IntentService {
         protected void onHandleIntent(Intent intent) {
             String homeURL = intent.getStringExtra(HOME_URL_PARAM);
             smartHomeHTTP = new SmartHomeHTTP(homeURL);
-           // while (true) {
-                String data = smartHomeHTTP.getSensorsData();
-                updateDB(data);
-            //    SystemClock.sleep(FETCH_INTERVAL_MILLIS);
-           // }
+            String data = smartHomeHTTP.getSensorsData();
+            updateDB(data);
         }
 
         public void updateDB(String data) {
