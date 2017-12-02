@@ -1,6 +1,7 @@
 package edu.iit.paco.smartdashboard;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -64,23 +65,25 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.show();
 
         String name = _nameText.getText().toString();
-        String email = _emailText.getText().toString();
+        final String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
         String homeurl = _urlText.getText().toString();
 
         DBHelper db = new DBHelper(this);
+        boolean userCreated = db.createUser(name, email, password, homeurl);
+        db.close();
         Runnable r;
-        if (db.createUser(name,email,password,homeurl)) {
+        if (userCreated) {
             r = new Runnable() {
                 public void run() {
-                    onSignupSuccess();
+                    onSignupSuccess(email);
                     progressDialog.dismiss();
                 }
             };
         } else {
             r = new Runnable() {
                 public void run() {
-                    onSignupFailed("email already exists");
+                    onSignupFailed("fields are invalid or email already exists");
                     progressDialog.dismiss();
                 }
             };
@@ -89,14 +92,16 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-    public void onSignupSuccess() {
+    public void onSignupSuccess(String email) {
         _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent data = new Intent();
+        data.putExtra("email", email);
+        setResult(RESULT_OK, data);
         finish();
     }
 
     public void onSignupFailed(String msg) {
-        Toast.makeText(getBaseContext(), "Login failed: " + msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Signup failed: " + msg, Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }
@@ -116,7 +121,8 @@ public class SignupActivity extends AppCompatActivity {
             _nameText.setError(null);
         }
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        //todo UNCOMMENT
+        if (email.isEmpty() ){//|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError("enter a valid email address");
             valid = false;
         } else {

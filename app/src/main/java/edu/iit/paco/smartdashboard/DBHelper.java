@@ -68,9 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(KEY_HOME_URL,homeurl);
 
         try {
-            db.insert(USER_TABLE_NAME, // table
-                        null, //nullColumnHack
-                        values); // key/value -> keys = column names/values
+            db.insertWithOnConflict(USER_TABLE_NAME,null,values,SQLiteDatabase.CONFLICT_ABORT);
         } catch (SQLiteConstraintException e) {
             // Show error message here
             return false;
@@ -81,15 +79,39 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public String getUserHomeURL(String user) {
-        String field, url;
-        if (user.contains("@")) {
-            field = KEY_EMAIL;
-        } else {
-            field = KEY_NAME;
-        }
+    public boolean loginUser(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT password FROM "+ USER_TABLE_NAME + " WHERE email= '" + email +"'";
+        Cursor cursor = db.rawQuery(query, null);
 
-        String query = "SELECT " + KEY_HOME_URL + " FROM " + USER_TABLE_NAME + " WHERE "+field+" = '" + user +"'";
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst(); // There will be only ONE result, as email is an UNIQUE field
+            String realPassword = cursor.getString(0);
+            db.close();
+            return password.equals(realPassword);
+        } else {
+            db.close();
+            return false;
+        }
+    }
+    public void getAllUsers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM "+ USER_TABLE_NAME;
+        
+        List<String> rows = new LinkedList<String>();
+        Cursor c = db.rawQuery(query, null);
+        if (c.moveToFirst()) {
+            do {
+                // Add measurement to the list
+                rows.add(c.getString(0)+","+c.getString(1)+","+c.getString(2)+","+c.getString(3)+","+c.getString(4));
+            } while (c.moveToNext());
+        }
+        Log.d("USERS_TABLE", rows.toString());
+    }
+
+    public String getUserHomeURL(String email) {
+        String url;
+        String query = "SELECT " + KEY_HOME_URL + " FROM " + USER_TABLE_NAME + " WHERE "+KEY_EMAIL+" = '" + email +"'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
@@ -97,6 +119,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
 
         return url;
+    }
+
+    public String getUserName(String usermail) {
+        String username;
+        String query = "SELECT " + KEY_NAME + " FROM " + USER_TABLE_NAME + " WHERE "+KEY_EMAIL+" = '" + usermail +"'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        username = cursor.getString(0);
+        db.close();
+
+        return username;
     }
 
 

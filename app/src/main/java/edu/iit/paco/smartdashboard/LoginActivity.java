@@ -22,7 +22,6 @@ package edu.iit.paco.smartdashboard;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-    private boolean serviceStarted = false;
 
     @InjectView(R.id.input_email) EditText _emailText;
     @InjectView(R.id.input_password) EditText _passwordText;
@@ -54,6 +53,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void startDashboardActivity(String email) {
+        Intent intent = new Intent(this, DashboardActivity.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
+    }
+
     public void login() {
         Log.d(TAG, "Login");
 
@@ -73,28 +78,28 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+        DBHelper db = new DBHelper(this);
+        final boolean userExits = db.loginUser(email, password);
+        db.close();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+                        if (userExits) onLoginSuccess();
+                        else onLoginFailed();
                         progressDialog.dismiss();
                     }
                 }, 3000);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
+                Intent intent = new Intent(this, DashboardActivity.class);
+                intent.putExtra("email", data.getStringExtra("email"));
+                startActivity(intent);
             }
         }
     }
@@ -107,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        finish();
+        startDashboardActivity(_emailText.getText().toString());
     }
 
     public void onLoginFailed() {
@@ -122,7 +127,8 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        //todo UNCOMMENT
+        if (email.isEmpty() ){//|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError("enter a valid email address");
             valid = false;
         } else {

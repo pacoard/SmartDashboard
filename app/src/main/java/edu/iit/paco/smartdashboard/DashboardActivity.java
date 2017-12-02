@@ -12,17 +12,20 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class DashboardActivity extends AppCompatActivity {
     private static final String TAG = "DashboardActivity";
     private boolean serviceStarted = false;
-    private String username;
+
     //private String homeURL;
-    private String homeURL = PeriodicUpdateService.LOCALHOST_URL;
+    private String homeURL;// = PeriodicUpdateService.LOCALHOST_URL;
 
     private Button sensorsBtn;
     private Button actuatorsBtn;
     private Button statisticsBtn;
+
+    private TextView welcomeTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,18 @@ public class DashboardActivity extends AppCompatActivity {
         sensorsBtn = (Button) findViewById(R.id.btn_sensors);
         actuatorsBtn = (Button) findViewById(R.id.btn_actuators);
         statisticsBtn = (Button) findViewById(R.id.btn_statistics);
+
+        welcomeTextView = (TextView) findViewById(R.id.welcomeTextView);
+
+        Intent intent = getIntent();
+        String usrEmail = intent.getStringExtra("email");
+
+        DBHelper db = new DBHelper(this);
+        db.getAllUsers();
+        homeURL = db.getUserHomeURL(usrEmail);
+
+        welcomeTextView.setText("Welcome, "+db.getUserName(usrEmail));
+        db.close();
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
