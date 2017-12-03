@@ -121,8 +121,8 @@ public class SignupActivity extends AppCompatActivity {
             _nameText.setError(null);
         }
 
-        //todo UNCOMMENT
-        if (email.isEmpty() ){//|| !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             _emailText.setError("enter a valid email address");
             valid = false;
         } else {
