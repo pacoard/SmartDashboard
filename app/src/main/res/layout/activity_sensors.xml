@@ -9,20 +9,23 @@
         tools:context="edu.iit.paco.smartdashboard.SensorsActivity">
 
     <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_lights"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:background="@color/colorPrimary"
-            android:fontFamily="monospace"
-            android:padding="7dp"
-            android:text="SENSORS"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginRight="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="88dp" tools:layout_constraintRight_creator="1" android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" tools:layout_constraintLeft_creator="1"/>
+        android:id="@+id/btn_lights"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="monospace"
+        android:padding="7dp"
+        android:text="SENSORS"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
     <EditText
             android:id="@+id/editTextTemperature"
@@ -30,27 +33,28 @@
             android:layout_height="0dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="@+id/btn_lights" tools:layout_constraintTop_creator="1"
-            tools:layout_constraintBottom_creator="1" app:layout_constraintBottom_toBottomOf="@+id/textViewTemperature"
-            android:layout_marginEnd="8dp" android:layout_marginTop="6dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_lights" android:layout_marginBottom="4dp"
-            android:focusedByDefault="false" android:focusable="auto" android:defaultFocusHighlightEnabled="false"
-            android:cursorVisible="false" android:contextClickable="false" android:selectAllOnFocus="false"/>
+        android:layout_marginEnd="8dp"
+        android:focusedByDefault="false" android:focusable="auto" android:defaultFocusHighlightEnabled="false"
+            android:cursorVisible="false" android:contextClickable="false" android:selectAllOnFocus="false"
+        tools:layout_editor_absoluteX="287dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewTemperature" />
 
     <TextView
-            android:id="@+id/textViewTemperature"
-            android:layout_width="193dp"
-            android:layout_height="0dp"
-            android:layout_marginRight="86dp"
-            android:text="Temperatature        :"
-            android:textSize="18sp"
-            app:layout_constraintRight_toLeftOf="@+id/editTextTemperature"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
-            app:layout_constraintHorizontal_bias="0.0" tools:layout_constraintTop_creator="1"
-            android:layout_marginStart="8dp" android:layout_marginEnd="86dp" android:layout_marginTop="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/btn_lights"/>
+        android:id="@+id/textViewTemperature"
+        android:layout_width="193dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="86dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="27dp"
+        android:text="Temperatature (F)       :"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
+        app:layout_constraintRight_toLeftOf="@+id/editTextTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/btn_lights"
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
             android:id="@+id/editTextHumidity"
@@ -58,28 +62,28 @@
             android:layout_height="43dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:layout_marginRight="8dp"
-            app:layout_constraintRight_toRightOf="@+id/btn_lights"
-            app:layout_constraintLeft_toRightOf="@+id/textViewTemperature"
-            android:layout_marginLeft="8dp"
-            app:layout_constraintHorizontal_bias="1.0" tools:layout_constraintTop_creator="1"
-            android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:layout_marginTop="21dp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTemperature" android:cursorVisible="false"
-            android:contextClickable="false"/>
+        android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+        android:cursorVisible="false"
+            android:contextClickable="false"
+        tools:layout_editor_absoluteY="205dp"
+        tools:layout_editor_absoluteX="287dp" />
 
     <TextView
         android:id="@+id/textViewHumidity"
         android:layout_width="193dp"
         android:layout_height="28dp"
+        android:layout_marginEnd="86dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="86dp"
-        android:text="Humidity                  :"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Humidity   (%)               :"
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
         app:layout_constraintRight_toLeftOf="@+id/editTextHumidity"
-        tools:layout_constraintTop_creator="1" android:layout_marginStart="8dp" android:layout_marginEnd="86dp"
-        android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/textViewTemperature"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemperature"
+        tools:layout_constraintTop_creator="1" />
 
     <EditText
             android:id="@+id/editTextNoise"
@@ -100,15 +104,18 @@
         android:id="@+id/textViewNoise"
         android:layout_width="193dp"
         android:layout_height="28dp"
+        android:layout_marginEnd="86dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="86dp"
-        android:text="Noise Level             :"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:text="Noise Level  (dB)         :"
         android:textSize="18sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/btn_lights"
         app:layout_constraintRight_toLeftOf="@+id/editTextHumidity"
-        tools:layout_constraintTop_creator="1" android:layout_marginStart="8dp" android:layout_marginEnd="86dp"
-        android:layout_marginTop="30dp" app:layout_constraintTop_toBottomOf="@+id/textViewHumidity"/>
+        app:layout_constraintTop_toBottomOf="@+id/textViewHumidity"
+        tools:layout_constraintTop_creator="1" />
 
     <ImageView
             android:id="@+id/refreshView"

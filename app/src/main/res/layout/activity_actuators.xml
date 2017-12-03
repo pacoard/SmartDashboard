@@ -9,15 +9,15 @@
               android:paddingTop="20dp" android:onClick="handleToggle">
 
     <android.support.v7.widget.AppCompatButton
-            android:id="@+id/seekbarButton"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginTop="14dp"
-            android:background="?attr/colorBackgroundFloating"
-            android:fontFamily="monospace"
-            android:padding="7dp"
-            android:text="THERMOSTAT"/>
+        android:id="@+id/seekbarButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="monospace"
+        android:padding="7dp"
+        android:text="THERMOSTAT" />
 
     <LinearLayout
             android:layout_width="354dp"
@@ -48,15 +48,15 @@
 
 
     <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_lights"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginTop="14dp"
-            android:background="?attr/colorBackgroundFloating"
-            android:fontFamily="monospace"
-            android:padding="7dp"
-            android:text="LIGHTS"/>
+        android:id="@+id/btn_lights"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="monospace"
+        android:padding="7dp"
+        android:text="LIGHTS" />
 
     <Switch
             android:id="@+id/lights_kitchen"
@@ -99,15 +99,15 @@
             android:textSize="18sp" android:onClick="handleToggle"/>
 
     <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_windows"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:layout_marginTop="14dp"
-            android:background="?attr/colorBackgroundFloating"
-            android:fontFamily="monospace"
-            android:padding="7dp"
-            android:text="WINDOWS"/>
+        android:id="@+id/btn_windows"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="monospace"
+        android:padding="7dp"
+        android:text="WINDOWS" />
 
     <Switch
             android:id="@+id/windows_kitchen"
