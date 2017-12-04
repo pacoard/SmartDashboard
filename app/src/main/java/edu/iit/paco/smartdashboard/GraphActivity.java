@@ -132,6 +132,9 @@ public class GraphActivity extends AppCompatActivity {
             graph.getGridLabelRenderer().setVerticalAxisTitle("(dB)");
         }
 
+
+        String[] lastRow = db.getLastRow();
+        String[] lastTime = lastRow[1].split(":");
         db.close();
 
         //Define X with dates
@@ -140,10 +143,12 @@ public class GraphActivity extends AppCompatActivity {
         cal.set(Calendar.SECOND, 01);
         Date d1 = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 59);
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(lastTime[0]));
+        cal.set(Calendar.MINUTE, Integer.parseInt(lastTime[1]));
+        cal.set(Calendar.SECOND, Integer.parseInt(lastTime[2]));
         Date d2 = cal.getTime();
+
+        db.close();
 
         //set manual X bounds (time)
         graph.getViewport().setXAxisBoundsManual(true);
