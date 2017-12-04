@@ -150,8 +150,8 @@ public class GraphActivity extends AppCompatActivity {
         db.close();
 
         //set manual X bounds (time)
-        graph.getViewport().setXAxisBoundsManual(false);
-        graph.getViewport().setYAxisBoundsManual(false);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
 
         graph.getViewport().setMinX(d1.getTime());
         graph.getViewport().setMaxX(d2.getTime());
