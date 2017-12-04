@@ -135,7 +135,6 @@ public class GraphActivity extends AppCompatActivity {
 
         String[] lastRow = db.getLastRow();
         String[] lastTime = lastRow[1].split(":");
-        db.close();
 
         //Define X with dates
         cal.set(Calendar.HOUR_OF_DAY, 00);
@@ -151,8 +150,8 @@ public class GraphActivity extends AppCompatActivity {
         db.close();
 
         //set manual X bounds (time)
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(false);
+        graph.getViewport().setYAxisBoundsManual(false);
 
         graph.getViewport().setMinX(d1.getTime());
         graph.getViewport().setMaxX(d2.getTime());

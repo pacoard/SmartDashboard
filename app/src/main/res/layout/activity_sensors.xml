@@ -33,11 +33,11 @@
             android:layout_height="0dp"
             android:ems="10"
             android:inputType="textPersonName"
-        android:layout_marginEnd="8dp"
-        android:focusedByDefault="false" android:focusable="auto" android:defaultFocusHighlightEnabled="false"
+            android:layout_marginEnd="28dp"
+            android:focusedByDefault="false" android:focusable="auto" android:defaultFocusHighlightEnabled="false"
             android:cursorVisible="false" android:contextClickable="false" android:selectAllOnFocus="false"
-        tools:layout_editor_absoluteX="287dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textViewTemperature" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/textViewTemperature"
+            tools:layout_constraintRight_creator="1" app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/textViewTemperature"
@@ -58,15 +58,16 @@
 
     <EditText
             android:id="@+id/editTextHumidity"
-            android:layout_width="69dp"
+            android:layout_width="0dp"
             android:layout_height="43dp"
             android:ems="10"
             android:inputType="textPersonName"
-        android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
-        android:cursorVisible="false"
+            android:cursorVisible="false"
             android:contextClickable="false"
-        tools:layout_editor_absoluteY="205dp"
-        tools:layout_editor_absoluteX="287dp" />
+            tools:layout_constraintTop_creator="1" tools:layout_constraintRight_creator="1"
+            app:layout_constraintRight_toRightOf="@+id/editTextTemperature" android:layout_marginTop="9dp"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTemperature" tools:layout_constraintLeft_creator="1"
+            app:layout_constraintLeft_toLeftOf="@+id/editTextTemperature"/>
 
     <TextView
         android:id="@+id/textViewHumidity"
