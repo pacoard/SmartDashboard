@@ -7,16 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,8 +22,8 @@ import java.util.Locale;
 public class GraphActivity extends AppCompatActivity {
     //Instance fields
     String selection = "";
-    DBHelper db = new DBHelper(this);
-    String[] sensors = new String[]{"Select measurements type", "Temperature", "Humidity", "Noise level"};
+
+    String[] sensors = new String[]{"Temperature", "Humidity", "Noise level"};
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.UK);
     Date x = new Date();
 
@@ -72,12 +68,13 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     public void drawGraph(GraphView graph){
+        DBHelper db = new DBHelper(this);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         Calendar cal = Calendar.getInstance();
 
+        int nPoints = db.getNumberOfRows();
         //When the user selects date and sensor, query de BBDD for data
         if (selection.equals("Temperature")) {
-
             //Call get temperature history from the DB
             List<String> temperatures = db.getTempHistory();
             Log.d("Temperatures from DB", temperatures.toString());
@@ -89,12 +86,11 @@ public class GraphActivity extends AppCompatActivity {
                 cal.set(Calendar.SECOND, Integer.parseInt(time[2]));
                 x = cal.getTime();
                 double y = Double.parseDouble(pairs[1]);
-                series.appendData(new DataPoint(x, y), true, 1000);
+                series.appendData(new DataPoint(x, y), true, nPoints);
             }
             graph.setTitle("Temperature measures");
-            graph.getViewport().setYAxisBoundsManual(true);
-            graph.getViewport().setMinY(55);
-            graph.getViewport().setMaxY(90);
+            graph.getViewport().setMinY(40);
+            graph.getViewport().setMaxY(100);
             graph.getGridLabelRenderer().setVerticalAxisTitle("(ºF)");
         } else if (selection.equals("Humidity")) {
             //Call get humidity history from the DB
@@ -107,12 +103,11 @@ public class GraphActivity extends AppCompatActivity {
                 cal.set(Calendar.SECOND, Integer.parseInt(time[2]));
                 x = cal.getTime();
                 double y = Double.parseDouble(pairs[1]);
-                series.appendData(new DataPoint(x, y),true,1000);
+                series.appendData(new DataPoint(x, y),true,nPoints);
             }
             graph.setTitle("Humidity measures");
-            graph.getViewport().setYAxisBoundsManual(true);
-            graph.getViewport().setMinY(45);
-            graph.getViewport().setMaxY(55);
+            graph.getViewport().setMinY(0);
+            graph.getViewport().setMaxY(110);
             graph.getGridLabelRenderer().setVerticalAxisTitle("(% humidity)");
         } else if (selection.equals("Noise level")) {
             //Call get noise history from the DB
@@ -128,14 +123,16 @@ public class GraphActivity extends AppCompatActivity {
                 double y = Double.parseDouble(pairs[1]);
                 y = Math.round(y*100.0)/100.0;
                 Log.d("Y con round", String.valueOf(y));
-                series.appendData(new DataPoint(x, y), true, 1000);
+                series.appendData(new DataPoint(x, y), true, nPoints);
             }
             graph.setTitle("Noise level measures");
-            graph.getViewport().setYAxisBoundsManual(true);
-            graph.getViewport().setMinY(8);
-            graph.getViewport().setMaxY(120);
+
+            graph.getViewport().setMinY(5);
+            graph.getViewport().setMaxY(150);
             graph.getGridLabelRenderer().setVerticalAxisTitle("(dB)");
         }
+
+        db.close();
 
         //Define X with dates
         cal.set(Calendar.HOUR_OF_DAY, 00);
@@ -150,19 +147,23 @@ public class GraphActivity extends AppCompatActivity {
 
         //set manual X bounds (time)
         graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+
         graph.getViewport().setMinX(d1.getTime());
         graph.getViewport().setMaxX(d2.getTime());
 
         //Label formatting
-        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getApplicationContext(), dateFormat));
+        graph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(this, dateFormat));
         graph.getGridLabelRenderer().setNumHorizontalLabels(4);
+        graph.getGridLabelRenderer().setNumVerticalLabels(4);
         graph.getGridLabelRenderer().setHumanRounding(false);
 
 
         // enable scaling and scrolling
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScrollableY(true);
         graph.addSeries(series);
-
     }
 }

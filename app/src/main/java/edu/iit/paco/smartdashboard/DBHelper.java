@@ -15,7 +15,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper {
     // Database Version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     // Database Name
     private static final String DATABASE_NAME = "MeasurementsDB";
 
@@ -97,7 +97,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void getAllUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM "+ USER_TABLE_NAME;
-        
+
         List<String> rows = new LinkedList<String>();
         Cursor c = db.rawQuery(query, null);
         if (c.moveToFirst()) {
@@ -223,6 +223,16 @@ public class DBHelper extends SQLiteOpenHelper {
             Log.d("Last measurement", "Last DB row: "+ Arrays.toString(lastRow));
         }
         return lastRow;
+    }
+
+    public int getNumberOfRows() {
+        int nRows;
+        String selectQuery = "SELECT id FROM " + HISTORY_TABLE_NAME;
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor c = database.rawQuery(selectQuery, null);
+        c.moveToFirst();
+        nRows = c.getCount();
+        return nRows;
     }
 
 }

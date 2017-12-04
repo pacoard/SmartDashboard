@@ -48,25 +48,11 @@ public class DashboardActivity extends AppCompatActivity {
         welcomeTextView.setText("Welcome, "+db.getUserName(usrEmail));
         db.close();
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
-        //  @Override
-        // public void onClick(View view) {
-        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-        // .setAction("Action", null).show();
-        //    };
-        // });
-
-        // Set username, get it from the database or intent
-
-        // Set homeURL, get it from the database or intent
+        startService();
 
     }
 
-    public void tryService(View v) {
+    public void startService() {
         // Construct an intent that will execute the AlarmReceiver
         Intent intent = new Intent(getApplicationContext(), PeriodicUpdateAlarm.class);
         intent.putExtra("url", homeURL);
